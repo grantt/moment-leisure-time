@@ -20,7 +20,7 @@ moment.fn.addBusinessDays = function(nDays) {
   let counter = Math.abs(nDays)
   while (counter) {
     this.add(incr, 'd');
-    if (this.holiday() || !this.businessDay()) {
+    if (!this.holiday() && this.businessDay()) {
       counter--
     }
   }
