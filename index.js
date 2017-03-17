@@ -13,7 +13,7 @@ moment.fn.holiday = function() {
 };
 
 moment.fn.businessDay = function(){
-  return moment._config.businessDays[this.locale()].includes(this.day())
+  return _.includes(moment._config.businessDays[this.locale()], this.day())
 };
 
 moment.fn.addBusinessDays = function(nDays) {
