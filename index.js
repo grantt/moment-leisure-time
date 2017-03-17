@@ -1,5 +1,6 @@
 'use strict';
 let moment = require('moment')
+let _ = require('lodash')
 let config = require('./config')
 
 moment.loadConfig = function(configObj) {
@@ -8,7 +9,7 @@ moment.loadConfig = function(configObj) {
 };
 
 moment.fn.holiday = function() {
-  return moment._config.holidays[this.locale()][this.year().toString()][this.month().toString()].includes(this.date())
+  return _.includes(moment._config.holidays[this.locale()][this.year().toString()][this.month().toString()], this.date())
 };
 
 moment.fn.businessDay = function(){
