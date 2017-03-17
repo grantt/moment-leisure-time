@@ -1,8 +1,8 @@
 'use strict';
-import moment from 'moment'
-import { config } from './config'
+let moment = require('moment')
+let config = require('./config')
 
-moment.loadConfig = (configObj) => {
+moment.loadConfig = function(configObj) {
   moment._config = configObj
   return moment._config
 };
@@ -13,24 +13,23 @@ moment.fn.holiday = function() {
 
 moment.fn.businessDay = function(){
   return moment._config.businessDays[this.locale()].includes(this.day())
-}
+};
 
 moment.fn.addBusinessDays = function(nDays) {
-  const incr = nDays > 0 ? 1 : -1
-  let counter = Math.abs(nDays)
+  let counter = Math.abs(nDays);
   while (counter) {
-    this.add(incr, 'd');
+    nDays > 0 ? this.add(1, 'days') : this.subtract(1, 'days');
     if (!this.holiday() && this.businessDay()) {
       counter--
     }
   }
   return this
-}
+};
 
 moment.fn.subtractBusinessDays = function(nDays) {
   return this.addBusinessDays(-nDays)
-}
+};
 
-moment.loadConfig(config)
+moment.loadConfig(config);
 
-export default moment
+module.exports = moment;

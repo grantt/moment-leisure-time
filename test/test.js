@@ -1,9 +1,8 @@
 'use strict'
-import moment from '../index'
-import chai from 'chai'
+let moment = require('../index')
+let chai = require('chai')
 
 let expect = chai.expect
-
 
 describe('Date', () => {
   describe('#holiday', () => {
